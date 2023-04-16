@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400" prefWidth="600" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="192.0" layoutY="33.0" text="Mealy State Machine" textFill="WHITE">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+        <TableView fx:id="table" layoutX="60" layoutY="80" prefHeight="250" prefWidth="480">
+            <columns>
+                <TableColumn fx:id="currentStateColumn" prefWidth="121.0" text="Current State" />
+                <TableColumn fx:id="inputColumn" prefWidth="115.0" text="Input" />
+                <TableColumn fx:id="nextStateColumn" prefWidth="109.0" text="Next State" />
+                <TableColumn fx:id="outputColumn" prefWidth="131.0" text="Output" />
+            </columns>
+        </TableView>
+        <Button fx:id="btnAddRow" layoutX="60.0" layoutY="345.0" mnemonicParsing="false" onAction="#addRow" style="-fx-background-color: #5D6D7E; -fx-text-fill: WHITE;" text="Add Row">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

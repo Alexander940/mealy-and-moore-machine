@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400" prefWidth="600" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="192.0" layoutY="33.0" text="Moore State Machine" textFill="WHITE">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+        <Label layoutX="64.0" layoutY="93.0" text="States:" textFill="WHITE">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="ftStates" layoutX="139.0" layoutY="98.0" prefHeight="27.0" prefWidth="395.0" promptText="q0,q1,q2,q3" />
+        <Label layoutX="60.0" layoutY="149.0" text="Initial State:" textFill="WHITE">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="ftInitialState" layoutX="179.0" layoutY="150.0" prefHeight="27.0" prefWidth="355.0" promptText="q0" />
+        <Label layoutX="59.0" layoutY="205.0" text="Alphabet:" textFill="WHITE">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="ftAlphabet" layoutX="162.0" layoutY="206.0" prefHeight="27.0" prefWidth="371.0" promptText="a,b,c,d" />
+        <Label layoutX="57.0" layoutY="263.0" text="Outputs:" textFill="WHITE">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="ftOutputs" layoutX="154.0" layoutY="264.0" prefHeight="27.0" prefWidth="378.0" promptText="a,b" />
+        <Button fx:id="btnCreateMachine" layoutX="236.0" layoutY="322.0" mnemonicParsing="false" onAction="#createMachine" style="-fx-background-color: #5D6D7E; -fx-text-fill: WHITE;" text="Create Machine">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

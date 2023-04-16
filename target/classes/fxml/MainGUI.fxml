@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="302.0" style="-fx-background-color: #5D6D7E;">
+         <children>
+            <Label layoutX="50.0" layoutY="122.0" text="Infinite State">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="86.0" layoutY="166.0" text="Machine">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="322.0" layoutY="61.0" text="Create State Machine">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <RadioButton fx:id="mealyMachine" layoutX="322.0" layoutY="171.0" mnemonicParsing="false" text="Maely Machine">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="mooreMachine" layoutX="322.0" layoutY="219.0" mnemonicParsing="false" text="Moore Machine">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="322.0" layoutY="126.0" text="Select Machine Type:">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="createMachine" layoutX="376.0" layoutY="297.0" mnemonicParsing="false" text="Create Machine">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

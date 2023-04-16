@@ -8,8 +8,6 @@ public class Graph {
     private String matrixInput[][];
     private String matrixOutput[][];
     private int matrixAdjacency[][];
-    private int coordinatesX[];
-    private int coordinatesY[];
     private Node nodesName[];
     private int numberNodes;
 
@@ -19,8 +17,6 @@ public class Graph {
         this.matrixInput = new String[numberNodes][numberOfCharactersInputAlphabet];
         this.matrixOutput = new String[numberNodes][numberOfCharactersOutputAlphabet];
         this.matrixAdjacency = new int[numberNodes][numberNodes];
-        this.coordinatesX = new int[numberNodes];
-        this.coordinatesY = new int[numberNodes];
         this.nodesName = new Node[numberNodes];
         this.numberNodes = numberNodes;
     }
@@ -61,22 +57,6 @@ public class Graph {
 
     public void setMatrixAdjacency(int node1, int node2, int adjacency) {
         this.matrixAdjacency[node1][node2] = adjacency;
-    }
-
-    public int getCoordinatesX(int position) {
-        return coordinatesX[position];
-    }
-
-    public void setCoordinatesX(int position, int coordinateX) {
-        this.coordinatesX[position] = coordinateX;
-    }
-
-    public int getCoordinatesY(int position) {
-        return coordinatesY[position];
-    }
-
-    public void setCoordinatesY(int position, int coordinateY) {
-        this.coordinatesY[position] = coordinateY;
     }
 
     public String getNameNode(int position) {

@@ -4,16 +4,35 @@ import java.util.ArrayList;
 
 public abstract class FSM {
     ArrayList<State> states;
+    ArrayList<State> auxStates;
     int statesNumber;
     ArrayList<String> outputAlphabet;
     ArrayList<String> inputAlphabet;
     State sourceState;
     Graph graph;
     ArrayList<ArrayList<State>> partitions;
+    ArrayList<ArrayList<State>> auxPartitions;
+
+    public FSM(ArrayList<State> states, int statesNumber, ArrayList<String> outputAlphabet, ArrayList<String> inputAlphabet, State sourceState) {
+        this.states = states;
+        this.statesNumber = statesNumber;
+        this.outputAlphabet = outputAlphabet;
+        this.inputAlphabet = inputAlphabet;
+        this.sourceState = sourceState;
+        this.auxStates = new ArrayList<>();
+        this.partitions = new ArrayList<>();
+        this.auxPartitions = new ArrayList<>();
+    }
 
     public abstract void minimize();
 
-    public abstract void assessEquivalentsStates();
+    abstract void assessEquivalentsStates();
+
+    abstract void compareStates(int i, int j, int count);
+
+    abstract void assessSuccessors();
+
+    abstract void assessEachSuccessor(State first, State second, int a);
 
     public void doRelatedFSM(){
         makeGraph();
@@ -29,7 +48,8 @@ public abstract class FSM {
             }
         }
 
-        states = statesRelated;
+        states = cloneStates(statesRelated);
+        auxStates = cloneStates(statesRelated);
     }
 
     private Graph makeGraph(){
@@ -49,4 +69,26 @@ public abstract class FSM {
     }
 
     abstract void assignEdgesToGraph();
+
+    abstract void assignInputAlphabet();
+
+    abstract void assignOutputAlphabet();
+
+    ArrayList<State> cloneStates(ArrayList<State> states){
+        ArrayList<State> cloneStates = new ArrayList<>();
+
+        for (int i = 0; i < states.size(); i++) {
+            cloneStates.add(i, states.get(i));
+        }
+
+        return cloneStates;
+    }
+
+    public ArrayList<ArrayList<State>> getAuxPartitions() {
+        return auxPartitions;
+    }
+
+    public void setAuxPartitions(ArrayList<ArrayList<State>> auxPartitions) {
+        this.auxPartitions = auxPartitions;
+    }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400" prefWidth="600" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="192.0" layoutY="33.0" text="Moore State Machine" textFill="WHITE">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tableTransitions" layoutX="36.0" layoutY="83.0" prefHeight="250.0" prefWidth="529.0">
+            <columns>
+                <TableColumn fx:id="colCurrentState" prefWidth="75.0" text="Current State" />
+                <TableColumn fx:id="colInput" prefWidth="75.0" text="Input" />
+                <TableColumn fx:id="colNextState" prefWidth="75.0" text="Next State" />
+                <TableColumn fx:id="colOutput" prefWidth="75.0" text="Output" />
+            </columns>
+        </TableView>
+        <Button fx:id="btnAddTransition" layoutX="198.0" layoutY="351.0" mnemonicParsing="false" onAction="#addTransition" style="-fx-background-color: #5D6D7E; -fx-text-fill: WHITE;" text="Add Transition">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
