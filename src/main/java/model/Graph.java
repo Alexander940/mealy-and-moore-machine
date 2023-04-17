@@ -75,4 +75,8 @@ public class Graph {
     public int getNumberNodes() {
         return numberNodes;
     }
+
+    public int [][] getAllMatrixAdjacency(){
+        return matrixAdjacency;
+    }
 }

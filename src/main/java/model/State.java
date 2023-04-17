@@ -2,11 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
-public class State {
+public abstract class State {
     String name;
     ArrayList<State> successors;
     String [] inputToSuccessors;
-    String[] outputToSuccessor;
     State partitionState;
 
     public State(String name) {
@@ -35,14 +34,6 @@ public class State {
 
     public void setInputToSuccessors(String[] inputToSuccessors) {
         this.inputToSuccessors = inputToSuccessors;
-    }
-
-    public String[] getOutputToSuccessor() {
-        return outputToSuccessor;
-    }
-
-    public void setOutputToSuccessor(String[] outputToSuccessor) {
-        this.outputToSuccessor = outputToSuccessor;
     }
 
     public State getPartitionState() {

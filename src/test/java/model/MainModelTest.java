@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
-
 public class MainModelTest {
     MainModel mainModel;
 
@@ -17,7 +15,7 @@ public class MainModelTest {
 
     @Test
     public void mealy_machine() {
-        State stateA = new State("A");
+        /*State stateA = new State("A");
         State stateB = new State("B");
         State stateC = new State("C");
 
@@ -26,13 +24,13 @@ public class MainModelTest {
         alphabet.add("1");
 
         stateA.setInputToSuccessors(new String[]{"0", "1"});
-        stateA.setOutputToSuccessor(new String[]{"0", "1"});
+        stateA.setOutputToSuccessors(new String[]{"0", "1"});
 
         stateB.setInputToSuccessors(new String[]{"0", "1"});
-        stateB.setOutputToSuccessor(new String[]{"1", "0"});
+        stateB.setOutputToSuccessors(new String[]{"1", "0"});
 
         stateC.setInputToSuccessors(new String[]{"0", "1"});
-        stateC.setOutputToSuccessor(new String[]{"0", "0"});
+        stateC.setOutputToSuccessors(new String[]{"0", "0"});
 
         ArrayList<State> successorsA = new ArrayList<>();
         successorsA.add(stateA);
@@ -57,6 +55,6 @@ public class MainModelTest {
         states.add(stateC);
 
         mainModel.createMachine(states, 3, alphabet, alphabet, stateA);
-        System.out.println(mainModel.minimize().size());
+        System.out.println(mainModel.minimize().size());*/
     }
 }

@@ -13,6 +13,8 @@ public abstract class FSM {
     ArrayList<ArrayList<State>> partitions;
     ArrayList<ArrayList<State>> auxPartitions;
 
+    public FSM(){}
+
     public FSM(ArrayList<State> states, int statesNumber, ArrayList<String> outputAlphabet, ArrayList<String> inputAlphabet, State sourceState) {
         this.states = states;
         this.statesNumber = statesNumber;
@@ -34,9 +36,13 @@ public abstract class FSM {
 
     abstract void assessEachSuccessor(State first, State second, int a);
 
+    /**
+     * This method calls the methods to do the graph and remove the don't related states
+     */
     public void doRelatedFSM(){
         makeGraph();
         ArrayList<State> statesRelated = new ArrayList<>();
+        statesRelated.add(sourceState);
 
         for (int i = 0; i < statesNumber; i++) {
             if(states.get(i) != sourceState){
@@ -52,15 +58,16 @@ public abstract class FSM {
         auxStates = cloneStates(statesRelated);
     }
 
-    private Graph makeGraph(){
+    /**
+     * This method initialize the graph and calls the methods to assign its edges and nodes
+     */
+    private void makeGraph(){
         this.graph = new Graph(statesNumber, inputAlphabet.size(), outputAlphabet.size());
         assignEachStateToNode();
         assignEdgesToGraph();
-
-        return null;
     }
 
-    private void assignEachStateToNode(){
+    void assignEachStateToNode(){
 
         for (int i = 0; i < states.size(); i++) {
             this.graph.setNameNodes(i, states.get(i).getName());
@@ -68,7 +75,14 @@ public abstract class FSM {
 
     }
 
-    abstract void assignEdgesToGraph();
+    void assignEdgesToGraph(){
+        for (int i = 0; i < statesNumber; i++) {
+            for (int j = 0; j < states.get(i).getSuccessors().size(); j++) {
+                int position = this.graph.returnPosition(states.get(i).getSuccessors().get(j).getName());
+                this.graph.setMatrixAdjacency(i, position, 1);
+            }
+        }
+    }
 
     abstract void assignInputAlphabet();
 
@@ -88,7 +102,7 @@ public abstract class FSM {
         return auxPartitions;
     }
 
-    public void setAuxPartitions(ArrayList<ArrayList<State>> auxPartitions) {
-        this.auxPartitions = auxPartitions;
+    public void setGraph(Graph graph) {
+        this.graph = graph;
     }
 }

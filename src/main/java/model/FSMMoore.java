@@ -82,18 +82,6 @@ public class FSMMoore extends FSM{
     }
 
     @Override
-    void assignEdgesToGraph(){
-        for (int i = 0; i < super.statesNumber; i++) {
-            ArrayList<State> nextStates = states.get(i).getSuccessors();
-            for (int j = 0; j < nextStates.size(); j++) {
-                int position = graph.returnPosition(nextStates.get(j).getName());
-                graph.setMatrixInput(i,position,states.get(i).getInputToSuccessors()[j]);
-                graph.setMatrixAdjacency(i,position,1);
-            }
-        }
-    }
-
-    @Override
     void assignInputAlphabet() {
 
     }

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class FSMMealy extends FSM{
 
+    public FSMMealy() {
+        super();
+    }
+
     public FSMMealy(ArrayList<State> states, int statesNumber, ArrayList<String> outputAlphabet, ArrayList<String> inputAlphabet, State sourceState) {
         super(states, statesNumber, outputAlphabet, inputAlphabet, sourceState);
     }
@@ -77,17 +81,6 @@ public class FSMMealy extends FSM{
         if(toggle){
             auxPartitions.get(a).add(first);
             auxPartitions.get(a).add(second);
-        }
-    }
-
-    @Override
-    void assignEdgesToGraph(){
-        for (int i = 0; i < statesNumber; i++) {
-            ArrayList<State> nextStates = states.get(i).getSuccessors();
-            for (int j = 0; j < nextStates.size(); j++) {
-                int position = graph.returnPosition(nextStates.get(j).getName());
-                graph.setMatrixAdjacency(i,position,1);
-            }
         }
     }
 
