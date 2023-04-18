@@ -1,26 +1,25 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class Graph {
 
-    // Sizes by default
-    private String matrixInput[][];
-    private String matrixOutput[][];
+    private ArrayList<Map<String, String>> transitions[][];
+    private String matrixInputToOutput[][];
     private int matrixAdjacency[][];
     private Node nodesName[];
     private int numberNodes;
 
     public Graph() {}
 
-    public Graph(final int numberNodes, int numberOfCharactersInputAlphabet, int numberOfCharactersOutputAlphabet) {
-        this.matrixInput = new String[numberNodes][numberOfCharactersInputAlphabet];
-        this.matrixOutput = new String[numberNodes][numberOfCharactersOutputAlphabet];
+    public Graph(final int numberNodes, int numberOfCharactersInputAlphabet) {
+        this.matrixInputToOutput = new String[numberNodes][numberOfCharactersInputAlphabet];
         this.matrixAdjacency = new int[numberNodes][numberNodes];
         this.nodesName = new Node[numberNodes];
         this.numberNodes = numberNodes;
     }
-
 
     public boolean checkIfNameAlreadyExist(String nameNode) {
         return Arrays.stream(this.nodesName).filter(name -> name != null && name.getName() != null && nameNode.equalsIgnoreCase(name.getName())).count() >= 1;
@@ -35,20 +34,12 @@ public class Graph {
         return 0;
     }
 
-    public String getMatrixInput(int node1, int node2) {
-        return matrixInput[node1][node2];
+    public String getMatrixInputToOutput(int node1, int node2) {
+        return matrixInputToOutput[node1][node2];
     }
 
-    public void setMatrixInput(int node1, int node2, String input) {
-        this.matrixInput[node1][node2] = input;
-    }
-
-    public String getMatrixOutput(int node1, int node2) {
-        return matrixOutput[node1][node2];
-    }
-
-    public void setMatrixOutput(int node1, int node2, String output) {
-        this.matrixOutput[node1][node2] = output;
+    public void setMatrixInputToOutput(int node1, int node2, String input) {
+        this.matrixInputToOutput[node1][node2] = input;
     }
 
     public int getMatrixAdjacency(int node1, int node2) {

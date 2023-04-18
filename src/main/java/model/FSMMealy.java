@@ -8,20 +8,30 @@ public class FSMMealy extends FSM{
         super();
     }
 
-    public FSMMealy(ArrayList<State> states, int statesNumber, ArrayList<String> outputAlphabet, ArrayList<String> inputAlphabet, State sourceState) {
+    public FSMMealy(ArrayList<State> states, int statesNumber, String [] outputAlphabet, String [] inputAlphabet, State sourceState) {
         super(states, statesNumber, outputAlphabet, inputAlphabet, sourceState);
     }
 
     @Override
+    <T extends State> ArrayList<ArrayList<T>> clonePartition(ArrayList<ArrayList<T>> partition) {
+        return null;
+    }
+
+    @Override
+    public FSM returnRelatedFSM() {
+        ArrayList<State> relatedStates = doRelatedFSM();
+        return new FSMMealy(relatedStates, relatedStates.size(), this.outputAlphabet, this.inputAlphabet, this.sourceState);
+    }
+
+    @Override
     public void minimize() {
-        doRelatedFSM();
         assessEquivalentsStates();
         assessSuccessors();
     }
 
     @Override
     public void assessEquivalentsStates() {
-        int count = 0;
+        /*int count = 0;
         while(auxStates.size()!=0){
             partitions.add(new ArrayList<>());
             if(auxStates.size() == 1){
@@ -35,14 +45,14 @@ public class FSMMealy extends FSM{
                 auxStates.remove(0);
             }
             count++;
-        }
+        }*/
     }
 
     @Override
-    void compareStates(int i, int j, int count) {
-        boolean toggle = true;
+    void compareStates(int i, int j, int count, ArrayList<MooreState> auxStates) {
+        /*boolean toggle = true;
         for (int k = 0; k < statesNumber; k++) {
-            if(auxStates.get(i).getInputToSuccessors()[k] != auxStates.get(j).getInputToSuccessors()[k]){
+            if(!auxStates.get(i).getInputToSuccessors()[k].equals(auxStates.get(j).getInputToSuccessors()[k])){
                 toggle = false;
             }
         }
@@ -50,52 +60,38 @@ public class FSMMealy extends FSM{
         if (toggle) {
             partitions.get(count).add(auxStates.get(j));
             auxStates.remove(j);
-        }
+        }*/
     }
 
     @Override
     void assessSuccessors() {
-        for (int i = 0; i < partitions.size(); i++) {
-            auxPartitions.add(new ArrayList<State>());
+        /*for (int i = 0; i < partitions.size(); i++) {
+            auxPartitions.add(new ArrayList<>());
             for (int j = 0; j < partitions.get(i).size(); j++) {
                 for (int k = 0; k < partitions.get(i).size(); k++) {
                     assessEachSuccessor(partitions.get(i).get(j), partitions.get(i).get(k), i);
                 }
             }
-        }
+        }*/
     }
 
     @Override
-    void assessEachSuccessor(State first, State second, int a) {
-        boolean toggle = false;
-        for (int k = 0; k < first.getSuccessors().size(); k++) {
-            for (int i = 0; i < second.getSuccessors().size(); i++) {
-                if(first.getSuccessors().get(k) == second.getSuccessors().get(i)){
-                    toggle = true;
-                    first.setPartitionState(first.getSuccessors().get(k));
-                    second.setPartitionState(first.getSuccessors().get(k));
-                }
-            }
-        }
+    void assessEachSuccessor(State first, State second, int a, ArrayList<ArrayList<State>> auxPartitions, int j) {
 
-        if(toggle){
-            auxPartitions.get(a).add(first);
-            auxPartitions.get(a).add(second);
-        }
     }
 
     @Override
-    void assignInputAlphabet() {
+    void assignInputToOutputArray() {
         for (int i = 0; i < statesNumber; i++) {
 
-            for (int j = 0; j < inputAlphabet.size(); j++) {
+            for (int j = 0; j < inputAlphabet.length; j++) {
 
             }
         }
     }
 
     @Override
-    void assignOutputAlphabet() {
+    void assignTransitions() {
 
     }
 }

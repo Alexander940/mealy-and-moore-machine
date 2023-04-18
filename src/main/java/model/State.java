@@ -4,28 +4,15 @@ import java.util.ArrayList;
 
 public abstract class State {
     String name;
-    ArrayList<State> successors;
     String [] inputToSuccessors;
-    State partitionState;
 
-    public State(String name) {
+    public State(String name, int inputToSuccessors) {
         this.name = name;
+        this.inputToSuccessors = new String[inputToSuccessors];
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<State> getSuccessors() {
-        return successors;
-    }
-
-    public void setSuccessors(ArrayList<State> successors) {
-        this.successors = successors;
     }
 
     public String[] getInputToSuccessors() {
@@ -36,11 +23,7 @@ public abstract class State {
         this.inputToSuccessors = inputToSuccessors;
     }
 
-    public State getPartitionState() {
-        return partitionState;
-    }
+    public abstract ArrayList<? extends State> getSuccessors();
 
-    public void setPartitionState(State partitionState) {
-        this.partitionState = partitionState;
-    }
+    public abstract void setSuccessors(ArrayList<? extends State> successors);
 }

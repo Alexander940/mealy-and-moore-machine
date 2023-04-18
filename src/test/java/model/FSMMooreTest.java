@@ -7,46 +7,13 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class FSMTest {
+public class FSMMooreTest {
 
-    FSMMealy fsmMealy;
     FSMMoore fsmMoore;
 
     @Before
     public void setUp() throws Exception {
-    }
 
-    public void scene1(){
-        ArrayList<State> states = new ArrayList<>();
-
-        String [] alphabet = {"0", "1"};
-
-        State stateA = new MealyState("A", 2);
-        State stateB = new MealyState("B", 2);
-        State stateC = new MealyState("C", 1);
-
-        ArrayList<State> successorsA = new ArrayList<>();
-        successorsA.add(stateA);
-        successorsA.add(stateC);
-
-        ArrayList<State> successorsB = new ArrayList<>();
-        successorsB.add(stateB);
-        successorsB.add(stateC);
-
-        ArrayList<State> successorsC = new ArrayList<>();
-        successorsC.add(stateC);
-
-        stateA.setSuccessors(successorsA);
-        stateB.setSuccessors(successorsB);
-        stateC.setSuccessors(successorsC);
-
-        states.add(stateA);
-        states.add(stateB);
-        states.add(stateC);
-
-
-
-        fsmMealy = new FSMMealy(states, states.size(), alphabet, alphabet, stateA);
     }
 
     public void scene2(){
@@ -106,48 +73,24 @@ public class FSMTest {
     }
 
     @Test
-    public void assign_the_edges_to_the_graph_preview_related_machine() {
-        scene1();
-
-        fsmMealy.setGraph(new Graph(3, 2));
-
-        fsmMealy.assignEachStateToNode();
-        fsmMealy.assignEdgesToGraph();
-
-        int [][] matrix = {{1,0,1},{0,1,1},{0,0,1}};
-
-        assertEquals(matrix, fsmMealy.graph.getAllMatrixAdjacency());
-    }
-
-    @Test
-    public void when_got_three_states_and_remove_not_related_states() {
-        scene1();
-
-        FSM relatedFSM = fsmMealy.returnRelatedFSM();
-
-        assertEquals(2, relatedFSM.states.size());
-    }
-
-    @Test
-    public void assign_the_edges_to_the_graph_preview_related_machine2() {
-        scene2();
-
-        fsmMealy.setGraph(new Graph(5, 3));
-
-        fsmMealy.assignEachStateToNode();
-        fsmMealy.assignEdgesToGraph();
-
-        int[][] matrix = {{0,1,1,0,0},{1,0,0,1,0},{0,1,0,0,0},{0,0,1,0,0},{0,0,0,1,0}};
-
-        assertEquals(matrix, fsmMealy.graph.getAllMatrixAdjacency());
-    }
-
-    @Test
-    public void when_got_five_states_and_remove_not_related_states() {
+    public void when_got_five_states_and_remove_not_related_states_and_make_first_step() {
         scene2();
 
         FSMMoore relatedFSM = (FSMMoore) fsmMoore.returnRelatedFSM();
 
-        assertEquals(4, relatedFSM.states.size());
+        relatedFSM.minimize();
+
+        assertEquals(3, relatedFSM.getPartitions().size());
+    }
+
+    @Test
+    public void realize_all_partitions() {
+        scene2();
+
+        FSMMoore relatedFSM = (FSMMoore) fsmMoore.returnRelatedFSM();
+
+        relatedFSM.minimize();
+
+        assertEquals(4, relatedFSM.getSecond_partitions().size());
     }
 }

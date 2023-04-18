@@ -1,45 +1,35 @@
 package model;
 
+import exceptions.NotExistentInputException;
+
 import java.util.ArrayList;
 
 public abstract class FSM {
-    ArrayList<State> states;
-    ArrayList<State> auxStates;
+    ArrayList<? extends State> states;
     int statesNumber;
-    ArrayList<String> outputAlphabet;
-    ArrayList<String> inputAlphabet;
+    String [] outputAlphabet;
+    String [] inputAlphabet;
     State sourceState;
     Graph graph;
     ArrayList<ArrayList<State>> partitions;
-    ArrayList<ArrayList<State>> auxPartitions;
+    ArrayList<ArrayList<State>> second_partitions;
 
     public FSM(){}
 
-    public FSM(ArrayList<State> states, int statesNumber, ArrayList<String> outputAlphabet, ArrayList<String> inputAlphabet, State sourceState) {
+    public FSM(ArrayList<State> states, int statesNumber, String [] outputAlphabet, String [] inputAlphabet, State sourceState) {
         this.states = states;
         this.statesNumber = statesNumber;
         this.outputAlphabet = outputAlphabet;
         this.inputAlphabet = inputAlphabet;
         this.sourceState = sourceState;
-        this.auxStates = new ArrayList<>();
         this.partitions = new ArrayList<>();
-        this.auxPartitions = new ArrayList<>();
+        this.second_partitions = new ArrayList<>();
     }
-
-    public abstract void minimize();
-
-    abstract void assessEquivalentsStates();
-
-    abstract void compareStates(int i, int j, int count);
-
-    abstract void assessSuccessors();
-
-    abstract void assessEachSuccessor(State first, State second, int a);
 
     /**
      * This method calls the methods to do the graph and remove the don't related states
      */
-    public void doRelatedFSM(){
+    public ArrayList<State> doRelatedFSM(){
         makeGraph();
         ArrayList<State> statesRelated = new ArrayList<>();
         statesRelated.add(sourceState);
@@ -54,19 +44,22 @@ public abstract class FSM {
             }
         }
 
-        states = cloneStates(statesRelated);
-        auxStates = cloneStates(statesRelated);
+        return statesRelated;
     }
+
 
     /**
      * This method initialize the graph and calls the methods to assign its edges and nodes
      */
-    private void makeGraph(){
-        this.graph = new Graph(statesNumber, inputAlphabet.size(), outputAlphabet.size());
+    void makeGraph(){
+        this.graph = new Graph(statesNumber, inputAlphabet.length);
         assignEachStateToNode();
         assignEdgesToGraph();
     }
 
+    /**
+     * This method assign the names to the graph's array
+     */
     void assignEachStateToNode(){
 
         for (int i = 0; i < states.size(); i++) {
@@ -75,6 +68,9 @@ public abstract class FSM {
 
     }
 
+    /**
+     * This method fills the matrix adjacency graph
+     */
     void assignEdgesToGraph(){
         for (int i = 0; i < statesNumber; i++) {
             for (int j = 0; j < states.get(i).getSuccessors().size(); j++) {
@@ -84,11 +80,7 @@ public abstract class FSM {
         }
     }
 
-    abstract void assignInputAlphabet();
-
-    abstract void assignOutputAlphabet();
-
-    ArrayList<State> cloneStates(ArrayList<State> states){
+    /*ArrayList<State> cloneStates(ArrayList<State> states){
         ArrayList<State> cloneStates = new ArrayList<>();
 
         for (int i = 0; i < states.size(); i++) {
@@ -96,13 +88,45 @@ public abstract class FSM {
         }
 
         return cloneStates;
-    }
+    }*/
 
-    public ArrayList<ArrayList<State>> getAuxPartitions() {
-        return auxPartitions;
+    abstract <T extends State> ArrayList<ArrayList<T>> clonePartition(ArrayList<ArrayList<T>> partition);
+
+    int inputPosition(String input) throws NotExistentInputException {
+        for (int i = 0; i < inputAlphabet.length; i++) {
+            if(inputAlphabet[i].equals(input)){
+                return i;
+            }
+        }
+
+        throw new NotExistentInputException();
     }
 
     public void setGraph(Graph graph) {
         this.graph = graph;
+    }
+
+    public abstract FSM returnRelatedFSM();
+
+    public abstract void minimize();
+
+    abstract void assessEquivalentsStates();
+
+    abstract void compareStates(int i, int j, int count, ArrayList<MooreState> auxStates);
+
+    abstract void assessSuccessors();
+
+    abstract void assessEachSuccessor(State first, State second, int a, ArrayList<ArrayList<State>> auxPartitions, int j);
+
+    abstract void assignInputToOutputArray();
+
+    abstract void assignTransitions();
+
+    public ArrayList<ArrayList<State>> getPartitions() {
+        return partitions;
+    }
+
+    public ArrayList<ArrayList<State>> getSecond_partitions() {
+        return second_partitions;
     }
 }

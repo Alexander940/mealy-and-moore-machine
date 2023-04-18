@@ -19,13 +19,13 @@ public class MainModel {
 
     private FSM machine;
 
-    public void createMachine(ArrayList<State> states, int statesNumber, ArrayList<String> outputAlphabet, ArrayList<String> inputAlphabet, State sourceState){
+    public void createMealyMachine(ArrayList<State> states, int statesNumber, String [] outputAlphabet, String [] inputAlphabet, State sourceState){
         machine = new FSMMealy(states, statesNumber, outputAlphabet, inputAlphabet, sourceState);
     }
 
     public ArrayList<ArrayList<State>> minimize(){
         machine.minimize();
-        return machine.getAuxPartitions();
+        return null;
     }
 
 }
